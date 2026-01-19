@@ -1,0 +1,113 @@
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex align-items-center justify-content-center h-100">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                    class="img-fluid" alt="Phone image">
+            </div>
+            <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+                <div class="log-reg">
+                @if(islog){
+                <form [formGroup]="Log" (ngSubmit)="onLogin()">
+                    <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">LOGIN</h2>
+                    <!-- Email input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="email" class="form-control form-control-lg" formControlName="email"/>
+                        <label class="form-label">Email address <span class="text-danger">*</span></label>
+                    </div>
+
+                    <!-- Password input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" class="form-control form-control-lg" formControlName="password"/>
+                        <label class="form-label">Password <span class="text-danger">*</span></label>
+                    </div>
+
+
+
+                    <!-- Submit button -->
+                    <button type="submit" [disabled]="Log.invalid"
+                        class="btn btn-primary btn-lg btn-block">Log in</button>
+
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                    </div>
+                    <p>Don't have an account? <a class="link-info" (click)='islog=false'>Register Here</a></p>
+
+                </form>
+                }
+
+
+                @else{
+                <form [formGroup]="Reg" (ngSubmit)="onRegister()">
+                    <h2 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">REGISTER</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <!-- <div data-mdb-input-init class="form-outline"> -->
+                            <input type="text"  class="form-control" formControlName="first" />
+                            <label class="form-label">First name <span class="text-danger">*</span></label>
+                            <!-- </div> -->
+                            <div class="text-danger" *ngIf="Reg.get('first')?.touched && Reg.get('first')?.invalid">
+                                <small *ngIf="Reg.get('first')?.errors?.['required']">First Name is required</small>
+                                <small *ngIf="Reg.get('first')?.errors?.['minlength']">Atleast 3 Characters
+                                    required</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <!-- <div data-mdb-input-init class="form-outline"> -->
+                            <input type="text" class="form-control" formControlName="last" />
+                            <label class="form-label" >Last name <span class="text-danger">*</span></label>
+                            <!-- </div> -->
+                             <div class="text-danger" *ngIf="Reg.get('last')?.touched && Reg.get('last')?.invalid">
+                                <small *ngIf="Reg.get('last')?.errors?.['required']">Last Name is required</small>
+                                <!-- <small *ngIf="Reg.get('last')?.errors?.['minlength']">Atleast 1 Characters required</small> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Email input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="email" id="form1Example13" class="form-control form-control-lg"
+                            formControlName="email" />
+                        <label class="form-label">Email address <span class="text-danger">*</span></label>
+                        <div class="text-danger" *ngIf="Reg.get('email')?.touched && Reg.get('email')?.invalid">
+                                <small *ngIf="Reg.get('email')?.errors?.['required']">First Name is required</small>
+                                <small *ngIf="Reg.get('email')?.errors?.['email']">Enter Valid Email ID</small>
+                        </div>
+                    </div>
+
+                    <!-- Password input -->
+                    <div data-mdb-input-init class="form-outline mb-4">
+                        <input type="password" class="form-control form-control-lg"
+                            formControlName="password" />
+                        <label class="form-label">Password <span class="text-danger">*</span></label>
+                        <div class="text-danger" *ngIf="Reg.get('password')?.touched && Reg.get('password')?.invalid">
+                                <small *ngIf="Reg.get('password')?.errors?.['required']">Password is required</small>
+                                <small *ngIf="Reg.get('password')?.errors?.['pwdStrength'] as ps">Password must Contains:
+                                    <ul>
+                                        <li *ngIf="!ps.hasLowerCase">Atleast 1 Lowercase char</li> <li *ngIf="!ps.hasMinLength">6 minimum characters </li>  
+                                        <li *ngIf="!ps.hasUpperCase">Atleast 1 Uppercase char</li>  <li *ngIf="!ps.hasNo">Atleast 1 Number</li>  
+                                        <li *ngIf="!ps.hasSpecialCase">Atleast 1 Special Symbol</li> 
+                                    </ul>
+                                </small>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Submit button -->
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                        class="btn btn-primary btn-lg btn-block" 
+                        [disabled]="Reg.invalid">Register</button>
+
+                    <div class="divider d-flex align-items-center my-4">
+                        <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
+                    </div>
+                    <p>Already have an account? <a class="link-info" (click)="islog=true">Login Here</a></p>
+
+                </form>
+                }
+
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
